@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: soft-monitor-service
+  #json 时间戳统一转换
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #开启aop
+  aop:
+    proxy-target-class: true
