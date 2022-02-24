@@ -1,6 +1,7 @@
 package org.soft.monitor.view;
 
 import cn.hutool.core.util.StrUtil;
+import com.melloware.jintellitype.JIntellitype;
 import org.soft.monitor.job.MonitorJob;
 import org.soft.monitor.view.model.ConfigData;
 
@@ -13,7 +14,8 @@ import java.io.File;
 public class ViewFrame extends JFrame {
 
     private static final String TITLE = "监控程序 v1.0.0";
-
+    /** 热键键码 */
+    private static final int KEY = 120;
 
     /** 画布宽高 */
     public static final int WINDOW_WIDTH = 560,WINDOW_HEIGHT = 400;
@@ -36,7 +38,8 @@ public class ViewFrame extends JFrame {
 
         this.setTitle(TITLE);
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        this.setVisible(true);
+        // 默认隐藏 热键 alt + p
+        this.setVisible(false);
         // 禁止改变大小
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -48,6 +51,19 @@ public class ViewFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
+            }
+        });
+
+
+        ViewFrame viewFrame = this;
+        //第一步：注册热键，第一个参数表示该热键的标识，第二个参数表示组合键，如果没有则为0，第三个参数为定义的主要热键
+        JIntellitype.getInstance().registerHotKey(KEY, JIntellitype.MOD_ALT, (int)'P');
+
+        //第二步：添加热键监听器
+        JIntellitype.getInstance().addHotKeyListener(markCode -> {
+            if (markCode == KEY) {
+                boolean visible = viewFrame.isVisible();
+                viewFrame.setVisible(!visible);
             }
         });
     }
@@ -155,10 +171,6 @@ public class ViewFrame extends JFrame {
         this.getContentPane().add(panel, BorderLayout.WEST);
     }
 
-
-    public static void main(String[] args) {
-        ViewFrame viewFrame = new ViewFrame();
-    }
 
 }
 
