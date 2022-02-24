@@ -2,6 +2,7 @@ package org.soft.monitor.view;
 
 import cn.hutool.core.util.StrUtil;
 import com.melloware.jintellitype.JIntellitype;
+import lombok.extern.slf4j.Slf4j;
 import org.soft.monitor.job.MonitorJob;
 import org.soft.monitor.view.model.ConfigData;
 
@@ -11,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
+@Slf4j
 public class ViewFrame extends JFrame {
 
     private static final String TITLE = "监控程序 v1.0.0";
@@ -64,6 +66,7 @@ public class ViewFrame extends JFrame {
             if (markCode == KEY) {
                 boolean visible = viewFrame.isVisible();
                 viewFrame.setVisible(!visible);
+                log.info("显示状态----{}", visible);
             }
         });
     }
